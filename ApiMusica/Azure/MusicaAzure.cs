@@ -39,8 +39,10 @@ namespace ApiMusica.Azure
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
+                var consultaSql = $"select * from Artista where idArtista = {idArtista}";
+
                 //CREAMOS Y ABRIMOS LA CONEXION
-                var comando = ConsultaArtistaPorIdSql(connection, idArtista);
+                var comando = consultaSqlArtista(connection, consultaSql);
 
                 //LLENAMOS EL DATATABLE(CONVERSION)
                 var dataTable = LLenarDataTable(comando);
@@ -54,7 +56,9 @@ namespace ApiMusica.Azure
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                var comando = ConsultarArtistaPorNombreSql(connection, nombreArtista);
+                var consultaSql = $"select * from Artista where nombreArtista = '{nombreArtista}'";
+
+                var comando = consultaSqlArtista(connection, consultaSql);
 
                 var dataTable = LLenarDataTable(comando);
 
@@ -62,21 +66,13 @@ namespace ApiMusica.Azure
             }
         }
 
-        private static SqlCommand ConsultarArtistaPorNombreSql(SqlConnection connection, string nombreArtista)
-        {
-            SqlCommand sqlCommand = new SqlCommand(null, connection);
-            sqlCommand.CommandText = $"select * from Artista where nombreArtista = '{nombreArtista}'";
-            connection.Open();
-            return sqlCommand;
-        }
 
-        private static SqlCommand ConsultaArtistaPorIdSql(SqlConnection connection, int idArtista)
+        private static SqlCommand consultaSqlArtista(SqlConnection connection, string consulta)
         {
             //CREAMOS Y ABRIMOS LA CONEXION
             SqlCommand sqlCommand = new SqlCommand(null, connection);
-            sqlCommand.CommandText = $"select * from Artista where idArtista = {idArtista}";
+            sqlCommand.CommandText = consulta;
             connection.Open();
-
             return sqlCommand;
         }
 
