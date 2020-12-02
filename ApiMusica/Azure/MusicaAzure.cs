@@ -26,15 +26,6 @@ namespace ApiMusica.Azure
             }             
         }
 
-        private static DataTable retornoDeArtistasSQL(SqlConnection connection)
-        {
-            
-            SqlCommand sqlCommand = new SqlCommand(null, connection);
-            sqlCommand.CommandText = "select * from Artista";
-            connection.Open();
-            return LLenarDataTable(sqlCommand);
-        }
-
         public static Artista ObtenerArtistaPorId(int idArtista)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -67,6 +58,94 @@ namespace ApiMusica.Azure
         }
 
 
+        public static int AgregarArtista(Artista artista)
+        {
+            int resultado = 0;
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand sqlCommand = new SqlCommand(null, connection);
+                sqlCommand.CommandText = "Insert into Artista (edad,aniosActivo,nombreArtista) values (@edad,@aniosActivo,@nombreArtista)";
+                sqlCommand.Parameters.AddWithValue("@edad", artista.edad);
+                sqlCommand.Parameters.AddWithValue("@aniosActivo", artista.aniosActivo);
+                sqlCommand.Parameters.AddWithValue("@nombreArtista", artista.nombreArtista);
+
+                try
+                {
+                    connection.Open();
+                    resultado = sqlCommand.ExecuteNonQuery();
+                    connection.Close();
+                }
+                catch (Exception ex)
+                {
+                   Console.WriteLine(ex.Message);
+                }
+            }
+            return resultado;
+        }
+
+        public static int EliminarArtistaPorNombre(string nombreArtista)
+        {
+            int resultado = 0;
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand sqlCommand = new SqlCommand(null, connection);
+                sqlCommand.CommandText = "Delete from Artista where nombreArtista = @nombreArtista";
+                sqlCommand.Parameters.AddWithValue("@nombreArtista", nombreArtista);
+
+                try
+                {
+                    connection.Open();
+                    resultado = sqlCommand.ExecuteNonQuery();
+                    connection.Close();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+            return resultado;
+        }
+
+        public static int ActualizarArtistaPorId(Artista artista)
+        {
+            int resultado = 0;
+            using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+            {
+                SqlCommand sqlCommand = new SqlCommand(null, sqlConnection);
+                sqlCommand.CommandText = "Update Artista SET edad = @edad, aniosActivo = @aniosActivo, nombreArtista = @nombreArtista where idArtista = @idArtista";
+                sqlCommand.Parameters.AddWithValue("@idArtista", artista.idArtista);
+                sqlCommand.Parameters.AddWithValue("@edad", artista.edad);
+                sqlCommand.Parameters.AddWithValue("@aniosActivo", artista.aniosActivo);
+                sqlCommand.Parameters.AddWithValue("@nombreArtista", artista.nombreArtista);
+
+                try
+                {
+                    sqlConnection.Open();
+                    resultado = sqlCommand.ExecuteNonQuery();
+                    sqlConnection.Close();
+                }
+                catch (Exception ex)
+                {
+
+                    Console.WriteLine(ex.Message);
+                }
+            }
+            return resultado;
+        }
+
+
+
+        private static DataTable retornoDeArtistasSQL(SqlConnection connection)
+        {
+            
+            SqlCommand sqlCommand = new SqlCommand(null, connection);
+            sqlCommand.CommandText = "select * from Artista";
+            connection.Open();
+            return LLenarDataTable(sqlCommand);
+        }
+    
         private static SqlCommand consultaSqlArtista(SqlConnection connection, string consulta)
         {
             //CREAMOS Y ABRIMOS LA CONEXION

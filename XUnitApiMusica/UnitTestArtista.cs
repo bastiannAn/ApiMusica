@@ -50,5 +50,26 @@ namespace XUnitApiMusica
             //Assert
             Assert.NotNull(artistaRetonado);
         }
+
+
+        [Fact]
+        public void TestActualizarArtistaPorId()
+        {
+            //Arrange
+            int resultadoEsperado = 1;
+            int resultadoObtenido = 0;
+
+            Artista artista = new Artista();
+            artista.idArtista = 1;
+            artista.edad = 22;
+            artista.aniosActivo = 5;
+            artista.nombreArtista = "Lord";
+
+            //Act
+            resultadoObtenido = MusicaAzure.ActualizarArtistaPorId(artista);
+
+            //Assert
+            Assert.Equal(resultadoEsperado, resultadoObtenido);
+        }
     }
 }
