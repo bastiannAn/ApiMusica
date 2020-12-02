@@ -54,6 +54,10 @@ namespace ApiMusica.Controllers
         //[HttpPut ("all")]
         //public JsonResult ActualizarArtista()
 
-
+        [HttpGet("hola")]
+        public JsonResult Saludo()
+        {
+            return new JsonResult("Hola!");
+        }
     }
 }
