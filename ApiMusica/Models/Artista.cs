@@ -12,7 +12,9 @@ namespace ApiMusica.Models
         public int aniosActivo { get; set; }
         public string nombreArtista { get; set; }
         
+        
 
     }
 }
 //test upload
+//Proband2
