@@ -176,7 +176,7 @@ namespace ApiMusica.Azure
 
                 var comando = ConsultaSql(connection, consultaSql);
 
-                var dataTable = LLenarDataTable(comando);
+                var DataTable = LLenarDataTable(comando);
 
                 return CreacionUsuario(dataTable);
             }
@@ -289,14 +289,14 @@ namespace ApiMusica.Azure
 
         public static Artista obtenerArtistaPorNombre(string nombreArtista)
         {
-            var dataTable = new DataTale();
+            var dataTable = new DataTable();
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 var consultaSql = $"select * from Artista where nombreArtista = '{nombreArtista}'";
 
                 var comando = consultaSqlArtista(connection, consultaSql);
 
-                var dataTable = LLenarDataTable(comando);
+                var DataTable = LLenarDataTable(comando);
 
                 return CreacionArtista(dataTable);
             }
@@ -441,7 +441,7 @@ namespace ApiMusica.Azure
                 Canciones canciones = new Canciones();
                 canciones.ID_cancion = int.Parse(dataTable.Rows[i]["ID_cancion"].ToString());
                 canciones.ID_letra = int.Parse(dataTable.Rows[i]["ID_letra"].ToString());
-                canciones.Nombre_cancion = string.Parse(dataTable.Rows[i]["Nombre_canciones"].ToString());
+                canciones.Nombre_cancion = dataTable.Rows[i]["Nombre_canciones"].ToString();
                 canciones.Duracion_cancion = int.Parse(dataTable.Rows[i]["Duracion_cancion"].ToString());
                 cancion.Add(canciones);
             }
@@ -480,9 +480,9 @@ namespace ApiMusica.Azure
             {
                 Usuarios usuarios = new Usuarios();
                 usuarios.ID_usuario = int.Parse(dataTable.Rows[i]["ID_usuario"].ToString());
-                usuarios.Nombre = string.Parse(dataTable.Rows[i]["Nombre"].ToString());
-                usuarios.Nombre_usuario = string.Parse(dataTable.Rows[i]["Nombre_usuario"].ToString());
-                usuarios.Correo = string.Parse(dataTable.Rows[i]["Correo"].ToString());
+                usuarios.Nombre = dataTable.Rows[i]["Nombre"].ToString();
+                usuarios.Nombre_usuario = dataTable.Rows[i]["Nombre_usuario"].ToString();
+                usuarios.Correo = dataTable.Rows[i]["Correo"].ToString();
                 Usuarioss.Add(usuarios);
             }
             return Usuarioss;
