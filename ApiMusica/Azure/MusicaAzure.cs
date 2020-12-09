@@ -26,7 +26,7 @@ namespace ApiMusica.Azure
             }
         }
 
-        public static Artista ObtenerCancionPorId_cancion(int ID_cancion)
+        public static Canciones ObtenerCancionPorId_cancion(int ID_cancion)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -43,7 +43,7 @@ namespace ApiMusica.Azure
             }
         }
 
-        public static Artista obtenerCancionPorNombre(string Nombre_cancion)
+        public static Canciones obtenerCancionPorNombre(string Nombre_cancion)
         {
             var dataTable = new DataTable();
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -138,7 +138,7 @@ namespace ApiMusica.Azure
 
         // -------------------------------------------------------------------------- USUARIOS
         //Obtener todos los Usuarios
-        public static List<Artista> ObtenerUsuarios()
+        public static List<Usuarios> ObtenerUsuarios()
         {
 
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -149,7 +149,7 @@ namespace ApiMusica.Azure
             }
         }
 
-        public static Artista ObtenerUsuariosPorId(int ID_usuario)
+        public static Usuarios ObtenerUsuariosPorId(int ID_usuario)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -167,7 +167,7 @@ namespace ApiMusica.Azure
             }
         }
 
-        public static Artista obtenerUsuarioPorNombreDeUsuario(string Nombre_usuario)
+        public static Usuarios obtenerUsuarioPorNombreDeUsuario(string Nombre_usuario)
         {
             var dataTable = new DataTable();
             using (SqlConnection connection = new SqlConnection(connectionString))
