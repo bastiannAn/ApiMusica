@@ -15,7 +15,7 @@ namespace ApiMusica.Azure
         public static List<Artista> artistas;
         //--------------------------------------------------------------------------- Canciones
         //Obtener todas las canciones
-        public static List<Artista> ObtenerCancion()
+        public static List<Canciones> ObtenerCancion()
         {
 
             using (SqlConnection connection = new SqlConnection(connectionString))
