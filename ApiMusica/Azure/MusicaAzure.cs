@@ -45,12 +45,12 @@ namespace ApiMusica.Azure
 
         public static Canciones obtenerCancionPorNombre(string Nombre_cancion)
         {
-            var dataTable = new DataTable();
+
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 var consultaSql = $"select * from Canciones where Nombre_cancion = '{Nombre_cancion}'";
 
-                var comando = consultaSqlArtista(connection, consultaSql);
+                var comando = ConsultaSql(connection, consultaSql);
 
                 var dataTable = LLenarDataTable(comando);
 
