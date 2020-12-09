@@ -174,7 +174,7 @@ namespace ApiMusica.Azure
             {
                 var consultaSql = $"select * from Artista where nombreArtista = '{Nombre_usuario}'";
 
-                var comando = consultaSqlArtista(connection, consultaSql);
+                var comando = ConsultaSql(connection, consultaSql);
 
                 var dataTable = LLenarDataTable(comando);
 
