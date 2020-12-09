@@ -277,7 +277,7 @@ namespace ApiMusica.Azure
                 var consultaSql = $"select * from Artista where idArtista = {idArtista}";
 
                 //CREAMOS Y ABRIMOS LA CONEXION
-                var comando = consultaSqlArtista(connection, consultaSql);
+                var comando = ConsultaSql(connection, consultaSql);
 
                 //LLENAMOS EL DATATABLE(CONVERSION)
                 var dataTable = LLenarDataTable(comando);
@@ -294,7 +294,7 @@ namespace ApiMusica.Azure
             {
                 var consultaSql = $"select * from Artista where nombreArtista = '{nombreArtista}'";
 
-                var comando = consultaSqlArtista(connection, consultaSql);
+                var comando = ConsultaSql(connection, consultaSql);
 
                 var DataTable = LLenarDataTable(comando);
 
@@ -435,7 +435,7 @@ namespace ApiMusica.Azure
 
         private static List<Canciones> LlenadoCanciones(DataTable dataTable)
         {
-            cancion = new List<Canciones>();
+            var cancion = new List<Canciones>();
             for (int i = 0; i < dataTable.Rows.Count; i++)
             {
                 Canciones canciones = new Canciones();
@@ -454,7 +454,7 @@ namespace ApiMusica.Azure
                 Canciones cancion = new Canciones();
                 cancion.ID_cancion = int.Parse(dataTable.Rows[0]["ID_cancion"].ToString());
                 cancion.ID_letra = int.Parse(dataTable.Rows[0]["ID_letra"].ToString());
-                cancion.Nombre_cancion = string.Parse(dataTable.Rows[0]["Nombre_cancion"].ToString());
+                cancion.Nombre_cancion = dataTable.Rows[0]["Nombre_cancion"].ToString();
                 cancion.Duracion_cancion = int.Parse(dataTable.Rows[0]["Duracion_cancion"].ToString());
 
                 return cancion;
@@ -475,7 +475,7 @@ namespace ApiMusica.Azure
         }
         private static List<Usuarios> LlenadoUsuarios(DataTable dataTable)
         {
-            Usuarioss = new List<Usuarios>();
+            var Usuarioss = new List<Usuarios>();
             for (int i = 0; i < dataTable.Rows.Count; i++)
             {
                 Usuarios usuarios = new Usuarios();
@@ -493,9 +493,9 @@ namespace ApiMusica.Azure
             {
                 Usuarios usuario = new Usuarios();
                 usuario.ID_usuario = int.Parse(dataTable.Rows[0]["ID_usuario"].ToString());
-                usuario.Nombre = string.Parse(dataTable.Rows[0]["Nombre"].ToString());
-                usuario.Nombre_usuario = string.Parse(dataTable.Rows[0]["Nombre_usuario"].ToString());
-                usuario.Correo = string.Parse(dataTable.Rows[0]["nombreArtista"].ToString());
+                usuario.Nombre = dataTable.Rows[0]["Nombre"].ToString();
+                usuario.Nombre_usuario = dataTable.Rows[0]["Nombre_usuario"].ToString();
+                usuario.Correo = dataTable.Rows[0]["nombreArtista"].ToString();
 
                 return usuario;
             }
