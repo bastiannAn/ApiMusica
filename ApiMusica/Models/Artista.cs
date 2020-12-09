@@ -16,9 +16,9 @@ namespace ApiMusica.Models
 
     public class Administradores
     {
-        public int idAdministrador { get; set; }
-        public string nombreAdmin { get; set; }
-        public string correo { get; set; }
+        public int ID_Administrador { get; set; }
+        public string Nombre_Admin { get; set; }
+        public string Correo { get; set; }
 
     }
 
@@ -38,9 +38,9 @@ namespace ApiMusica.Models
     public class Usuarios
     {
         public int ID_usuario { get; set; }
-        public string nombre { get; set; }
+        public string Nombre { get; set; }
         public string Nombre_usuario { get; set; }
-        public string correo { get; set; }
+        public string Correo { get; set; }
     }
     public class letra
     {
